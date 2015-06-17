@@ -5,7 +5,7 @@
 var app = {
     clock: undefined,
     selector: '#countdown',
-    totalSeconds: 50,
+    totalSeconds: 20,
     lastSeconds: 8,
     remainingSeconds: undefined
 };
@@ -23,6 +23,8 @@ app.init = function () {
                     app.remainingSeconds = time;
                 }
             }, stop: function () {
+                var $audio = $('#finalTickSoundTrack')[0];
+                app.stopCurrentAudioAndPlayAgain($audio);
                 app.applyPausedStyle();
             }
         }
@@ -113,10 +115,9 @@ app.applyPausedStyle = function () {
 };
 
 app.playAudioInLastTenSeconds = function (seconds) {
-    var $audio = $('#lastSeconds')[0];
+    var $audio = $('#tickingSoundTrack')[0];
     if (seconds > app.lastSeconds)
         return;
-
     app.stopCurrentAudioAndPlayAgain($audio);
 };
 
