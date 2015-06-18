@@ -21,10 +21,16 @@ app.init = function () {
                 if (time) {
                     app.playAudioInLastTenSeconds(time);
                     app.remainingSeconds = time;
+
+                    // hack, ring last bell 1 second later
+                    if (time == 1) {
+                        setTimeout(function () {
+                            var $audio = $('#finalTickSoundTrack')[0];
+                            app.stopCurrentAudioAndPlayAgain($audio);
+                        }, 1000);
+                    }
                 }
             }, stop: function () {
-                var $audio = $('#finalTickSoundTrack')[0];
-                app.stopCurrentAudioAndPlayAgain($audio);
                 app.applyPausedStyle();
             }
         }
@@ -81,7 +87,8 @@ app.bindEvents = function () {
             callback: function (result) {
                 if (result === null) {
                     //Example.show("Prompt dismissed");
-                } else {
+                }
+                else {
                     var parsedResult = parseInt(result);
                     if (parsedResult) {
                         app.lastSeconds = parsedResult;
