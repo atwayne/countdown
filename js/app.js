@@ -83,7 +83,7 @@ app.bindEvents = function () {
     $('#setFinalSeconds').click(function () {
         bootbox.prompt({
             title: "Set Final Seconds of clock",
-            value: app.totalSeconds,
+            value: app.lastSeconds,
             callback: function (result) {
                 if (result === null) {
                     //Example.show("Prompt dismissed");
